@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $quiz->title . ' | ' . __('Quizzes'))
+@section('title', $quiz->title . ' | ' . __('messages.quizzes.title'))
 
 @section('content')
 <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
@@ -8,7 +8,7 @@
 
     <div style="margin-bottom: 30px;">
         <a href="{{ route('student.quizzes.index') }}" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; font-size: 13px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; background: rgba(255, 255, 255, 0.02); transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.15)'">
-            <i class="fas fa-arrow-left me-2"></i> {{ __('Back to Quizzes') }}
+            <i class="fas fa-arrow-left me-2"></i> {{ __('messages.quizzes.back_to_list') }}
         </a>
     </div>
 
@@ -30,36 +30,36 @@
                 </div>
 
                 <div style="color: var(--text-primary); font-size: 15px; line-height: 1.6; margin-bottom: 28px;">
-                    <h5 style="color: #fff; font-weight: 700; margin-bottom: 10px;">{{ __('About this Quiz') }}</h5>
-                    <p style="white-space: pre-wrap;">{{ $quiz->description ?? __('No description provided.') }}</p>
+                    <h5 style="color: #fff; font-weight: 700; margin-bottom: 10px;">{{ __('messages.quizzes.about_title') }}</h5>
+                    <p style="white-space: pre-wrap;">{{ $quiz->description ?? __('messages.quizzes.no_desc') }}</p>
                 </div>
 
-                <h3 style="font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 20px;">{{ __('Your Attempts History') }}</h3>
+                <h3 style="font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 20px;">{{ __('messages.quizzes.history_title') }}</h3>
                 <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; overflow: hidden;">
                     <table style="width: 100%; border-collapse: collapse; text-align: left;">
                         <thead>
                             <tr style="background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.06);">
-                                <th style="padding: 14px 20px; color: var(--text-muted); font-size: 12.5px; font-weight: 700;">{{ __('Date') }}</th>
-                                <th style="padding: 14px 20px; color: var(--text-muted); font-size: 12.5px; font-weight: 700;">{{ __('Score') }}</th>
-                                <th style="padding: 14px 20px; color: var(--text-muted); font-size: 12.5px; font-weight: 700;">{{ __('Status') }}</th>
+                                <th style="padding: 14px 20px; color: var(--text-muted); font-size: 12.5px; font-weight: 700;">{{ __('messages.quizzes.table_date') }}</th>
+                                <th style="padding: 14px 20px; color: var(--text-muted); font-size: 12.5px; font-weight: 700;">{{ __('messages.quizzes.table_score') }}</th>
+                                <th style="padding: 14px 20px; color: var(--text-muted); font-size: 12.5px; font-weight: 700;">{{ __('messages.quizzes.table_status') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($attempts as $attempt)
                                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                                    <td style="padding: 14px 20px; color: var(--text-muted); font-size: 13.5px;">{{ $attempt->completed_at ? $attempt->completed_at->format('M d, Y H:i') : __('Incomplete') }}</td>
+                                    <td style="padding: 14px 20px; color: var(--text-muted); font-size: 13.5px;">{{ $attempt->completed_at ? $attempt->completed_at->format('M d, Y H:i') : __('messages.quizzes.status_incomplete') }}</td>
                                     <td style="padding: 14px 20px; font-weight: 700; color: #fff;">{{ $attempt->score }}%</td>
                                     <td style="padding: 14px 20px;">
                                         @if($attempt->passed)
-                                            <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 600; border-radius: 8px; padding: 4px 10px;">{{ __('Passed') }}</span>
+                                            <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.2); font-weight: 600; border-radius: 8px; padding: 4px 10px;">{{ __('messages.quizzes.status_passed') }}</span>
                                         @else
-                                            <span class="badge" style="background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 600; border-radius: 8px; padding: 4px 10px;">{{ __('Failed') }}</span>
+                                            <span class="badge" style="background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); font-weight: 600; border-radius: 8px; padding: 4px 10px;">{{ __('messages.quizzes.status_failed') }}</span>
                                         @endif
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 13.5px;">{{ __('No attempts recorded yet.') }}</td>
+                                    <td colspan="3" style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 13.5px;">{{ __('messages.quizzes.no_attempts_recorded') }}</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -72,7 +72,7 @@
         <div class="col-lg-4">
             <div class="glass-card" style="padding: 32px;">
                 <h3 style="font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 12px;">
-                    {{ __('Quiz Parameters') }}
+                    {{ __('messages.quizzes.parameters_title') }}
                 </h3>
 
                 <div style="display: flex; flex-direction: column; gap: 16px; font-size: 14px; margin-bottom: 28px;">
@@ -94,7 +94,15 @@
                     </div>
                 </div>
 
-                @if($attempts->count() < $quiz->max_attempts)
+                @php
+                    $hasPassed = $attempts->contains('passed', true);
+                @endphp
+
+                @if($hasPassed)
+                    <button class="btn btn-sm" disabled style="padding: 12px; opacity: 0.9; cursor: not-allowed; border-radius: 10px; width: 100%; border: 1px solid rgba(16, 185, 129, 0.2); color: #34d399; background: rgba(16, 185, 129, 0.12); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                        <i class="fas fa-check-circle"></i> {{ __('messages.quizzes.status_passed') }}
+                    </button>
+                @elseif($attempts->count() < $quiz->max_attempts)
                     <form action="{{ route('student.quizzes.start', $quiz->id) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-gradient w-100" style="padding: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; border-radius: 10px;">

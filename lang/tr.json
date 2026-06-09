@@ -1,4 +1,11 @@
 {
+    "Content Review Queue": "İçerik İnceleme Kuyruğu",
+    "Moderate and review course contents submitted by instructors before publishing them to the public platform.": "Eğitmenler tarafından gönderilen kurs içeriklerini herkese açık platformda yayınlamadan önce denetleyin ve inceleyin.",
+    "Pending Moderation": "Onay Bekleyenler",
+    "Course": "Kurs",
+    "Instructor": "Eğitmen",
+    "Price & Level": "Fiyat & Seviye",
+    "All clear! No pending courses for moderation.": "Her şey temiz! Onay bekleyen kurs bulunmamaktadır.",
     "You have started registration on the <strong>EduPlatform</strong> platform. Please use the following one-time verification code to complete your registration:": "<strong>EduPlatform</strong> platformunda kayıt işlemine başladınız. Kaydınızı tamamlamak için lütfen aşağıdaki tek seferlik doğrulama kodunu kullanın:",
     "Insert a direct link to the embed version of the YouTube video. To make the video play without sound, add parameters to the end of the link": "YouTube videosunun gömülü sürümüne doğrudan bir bağlantı ekleyin. Videonun sessiz oynatılmasını sağlamak için bağlantının sonuna parametreler ekleyin",
     "The code is valid for 15 minutes. If you did not request this code, simply ignore this email.": "Kod 15 dakika süreyle geçerlidir. Bu kodu siz talep etmediyseniz bu e-postayı dikkate almayın.",
@@ -1120,5 +1127,6 @@
     "Question deleted successfully!": "Soru başarıyla silindi!",
     "Are you sure you want to delete this question?": "Bu soruyu silmek istediğinizden emin misiniz?",
     "Edit question": "Soruyu düzenle",
-    "Update the question and answer options": "Soruyu ve cevap seçeneklerini güncelleyin"
+    "Update the question and answer options": "Soruyu ve cevap seçeneklerini güncelleyin",
+    "You have already passed this quiz.": "Bu sınavı zaten geçtiniz."
 }

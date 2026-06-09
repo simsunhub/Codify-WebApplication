@@ -122,6 +122,24 @@ class EnrollmentTest extends TestCase
             'user_id' => $this->student->id,
             'course_id' => $paidCourse->id,
         ]);
+
+        $this->assertDatabaseHas('orders', [
+            'user_id' => $this->student->id,
+            'subtotal' => 99.99,
+            'total' => 99.99,
+            'status' => 'completed',
+        ]);
+
+        $this->assertDatabaseHas('order_items', [
+            'course_id' => $paidCourse->id,
+            'price' => 99.99,
+        ]);
+
+        $this->assertDatabaseHas('payments', [
+            'user_id' => $this->student->id,
+            'amount' => 99.99,
+            'status' => 'completed',
+        ]);
     }
 
     public function test_course_completion_triggers_certificate_generation()
@@ -190,5 +208,43 @@ class EnrollmentTest extends TestCase
         $response = $this->get(route('certificates.download', $certificate->code));
         $response->assertStatus(200);
         $response->assertHeader('content-type', 'application/pdf');
+    }
+
+    public function test_student_can_view_orders_index_and_details()
+    {
+        $paidCourse = Course::create([
+            'user_id' => $this->teacher->id,
+            'category_id' => $this->category->id,
+            'title' => 'Advanced PHP',
+            'slug' => 'advanced-php',
+            'description' => 'Learn advanced PHP.',
+            'price' => 99.99,
+            'level' => 'advanced',
+            'status' => 'published',
+        ]);
+
+        $cardData = [
+            'card_name' => 'Ivan Student',
+            'card_number' => '1111222233334444',
+            'card_expiry' => '12/29',
+            'card_cvc' => '123',
+        ];
+
+        // Perform checkout
+        $this->actingAs($this->student)->post(route('course.checkout.process', $paidCourse->slug), $cardData);
+
+        // Get the order
+        $order = \App\Models\Order::where('user_id', $this->student->id)->first();
+
+        // 1. Assert can view orders list page
+        $responseIndex = $this->actingAs($this->student)->get(route('student.orders.index'));
+        $responseIndex->assertStatus(200);
+        $responseIndex->assertSee($order->order_number);
+
+        // 2. Assert can view order details page
+        $responseShow = $this->actingAs($this->student)->get(route('student.orders.show', $order->id));
+        $responseShow->assertStatus(200);
+        $responseShow->assertSee($order->order_number);
+        $responseShow->assertSee('Advanced PHP');
     }
 }

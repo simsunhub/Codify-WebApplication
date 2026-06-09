@@ -6,6 +6,10 @@ use App\Models\Course;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use App\Models\Notification;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Payment;
+use Illuminate\Support\Str;
 
 class EnrollmentController extends Controller
 {
@@ -107,7 +111,34 @@ class EnrollmentController extends Controller
             'card_cvc' => 'required|string',
         ]);
 
-        // Complete enrollment (simulation successful)
+        // 1. Create Order
+        $order = Order::create([
+            'user_id' => $user->id,
+            'subtotal' => $course->price,
+            'discount' => 0,
+            'total' => $course->price,
+            'status' => 'completed',
+        ]);
+
+        // 2. Create Order Item
+        OrderItem::create([
+            'order_id' => $order->id,
+            'course_id' => $course->id,
+            'price' => $course->price,
+        ]);
+
+        // 3. Create Payment record
+        Payment::create([
+            'order_id' => $order->id,
+            'user_id' => $user->id,
+            'amount' => $course->price,
+            'payment_method' => 'card',
+            'transaction_id' => 'TXN-' . strtoupper(Str::random(12)),
+            'status' => 'completed',
+            'paid_at' => now(),
+        ]);
+
+        // 4. Complete enrollment
         Enrollment::create([
             'user_id' => $user->id,
             'course_id' => $course->id,

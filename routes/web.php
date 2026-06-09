@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
 
     // Student: Orders & Purchases
     Route::get('/student/orders', [\App\Http\Controllers\Student\OrderController::class, 'index'])->name('student.orders.index')->middleware('lms_module:purchases');
+    Route::get('/student/orders/{id}', [\App\Http\Controllers\Student\OrderController::class, 'show'])->name('student.orders.show')->middleware('lms_module:purchases');
 
     // Student: Playlist & Watch Later
     Route::middleware('lms_module:playlist')->group(function () {

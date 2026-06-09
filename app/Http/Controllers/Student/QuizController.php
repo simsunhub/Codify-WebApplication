@@ -56,6 +56,17 @@ class QuizController extends Controller
         $userId = auth()->id();
         $quiz = Quiz::where('is_published', true)->findOrFail($id);
 
+        // Check if already passed
+        $hasPassed = QuizAttempt::where('quiz_id', $id)
+            ->where('user_id', $userId)
+            ->where('passed', true)
+            ->exists();
+
+        if ($hasPassed) {
+            return redirect()->route('student.quizzes.show', $id)
+                ->with('error', __('You have already passed this quiz.'));
+        }
+
         // Check attempts limit
         $attemptsCount = QuizAttempt::where('quiz_id', $id)
             ->where('user_id', $userId)

@@ -10,7 +10,7 @@
         </div>
         
         <h1 style="font-size: 28px; font-weight: 800; color: #fff; margin: 0 0 8px 0;">
-            {{ $attempt->passed ? (__('messages.quizzes.passed_title') ?? 'Congratulations, You Passed!') : (__('messages.quizzes.failed_title') ?? 'Quiz Attempt Completed') }}
+            {{ $attempt->passed ? __('messages.quizzes.passed_title') : __('messages.quizzes.failed_title') }}
         </h1>
         <p style="color: var(--text-muted, #64748b); font-size: 15px; margin: 0 0 24px 0;">
             {{ $attempt->quiz->title }}
@@ -19,29 +19,29 @@
         <!-- Stats Grid -->
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; max-width: 500px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;">
             <div>
-                <span style="font-size: 13px; color: var(--text-muted, #64748b); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">{{ __('messages.quizzes.score_lbl') ?? 'Your Score' }}</span>
+                <span style="font-size: 13px; color: var(--text-muted, #64748b); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">{{ __('messages.quizzes.score_lbl') }}</span>
                 <p style="font-size: 32px; font-weight: 800; color: {{ $attempt->passed ? '#10b981' : '#ef4444' }}; margin: 6px 0 0 0;">{{ round($attempt->score, 1) }}%</p>
             </div>
             <div>
-                <span style="font-size: 13px; color: var(--text-muted, #64748b); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">{{ __('messages.quizzes.points_lbl') ?? 'Points' }}</span>
+                <span style="font-size: 13px; color: var(--text-muted, #64748b); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">{{ __('messages.quizzes.points_lbl') }}</span>
                 <p style="font-size: 32px; font-weight: 800; color: #fff; margin: 6px 0 0 0;">{{ $attempt->earned_points }} / {{ $attempt->total_points }}</p>
             </div>
             <div>
-                <span style="font-size: 13px; color: var(--text-muted, #64748b); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">{{ __('messages.quizzes.passing_lbl') ?? 'Passing Score' }}</span>
+                <span style="font-size: 13px; color: var(--text-muted, #64748b); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">{{ __('messages.quizzes.passing_lbl') }}</span>
                 <p style="font-size: 32px; font-weight: 800; color: rgba(255,255,255,0.6); margin: 6px 0 0 0;">{{ $attempt->quiz->pass_percentage }}%</p>
             </div>
         </div>
 
         <div style="margin-top: 32px;">
             <a href="{{ route('student.quizzes.show', $attempt->quiz_id) }}" class="btn btn-outline" style="padding: 10px 24px; font-size: 14.5px; text-decoration: none;">
-                <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> {{ __('messages.quizzes.back_to_quiz') ?? 'Back to Quiz' }}
+                <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> {{ __('messages.quizzes.back_to_quiz') }}
             </a>
         </div>
     </div>
 
     <!-- Detailed Review -->
     <h2 style="font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 20px;">
-        {{ __('messages.quizzes.detailed_review') ?? 'Detailed Question Review' }}
+        {{ __('messages.quizzes.detailed_review') }}
     </h2>
 
     <div style="display: flex; flex-direction: column; gap: 20px;">
@@ -113,11 +113,11 @@
                             
                             @if($isSelected)
                                 <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: {{ $isCorrect ? '#10b981' : '#ef4444' }};">
-                                    {{ __('messages.quizzes.your_answer') ?? 'Your Answer' }}
+                                    {{ __('messages.quizzes.your_answer') }}
                                 </span>
                             @elseif($isOptionCorrect && $selectedOptionId !== null)
                                 <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #10b981;">
-                                    {{ __('messages.quizzes.correct_answer') ?? 'Correct' }}
+                                    {{ __('messages.quizzes.correct_answer') }}
                                 </span>
                             @endif
                         </div>
@@ -129,7 +129,7 @@
                     <div style="background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; margin-top: 12px; display: flex; gap: 12px; align-items: start;">
                         <i class="fas fa-lightbulb" style="color: var(--brand, #f97316); margin-top: 2px;"></i>
                         <div>
-                            <span style="font-size: 12.5px; font-weight: 700; color: #fff; display: block; margin-bottom: 4px;">{{ __('messages.quizzes.explanation_lbl') ?? 'Explanation' }}</span>
+                            <span style="font-size: 12.5px; font-weight: 700; color: #fff; display: block; margin-bottom: 4px;">{{ __('messages.quizzes.explanation_lbl') }}</span>
                             <p style="margin: 0; font-size: 13px; color: var(--text-muted, #64748b); line-height: 1.5;">
                                 {{ $q->explanation }}
                             </p>

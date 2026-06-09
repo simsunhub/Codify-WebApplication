@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('Quiz Attempt') . ' | ' . $attempt->quiz->title)
+@section('title', __('messages.quizzes.attempt_title') . ' | ' . $attempt->quiz->title)
 
 @section('content')
 <div class="container" style="padding-top: 100px; padding-bottom: 60px;">
@@ -24,7 +24,7 @@
                                 <h4 style="font-size: 16px; font-weight: 700; color: #fff; margin: 0; line-height: 1.4;">
                                     {{ $index + 1 }}. {{ $q->question }}
                                 </h4>
-                                <span class="badge bg-secondary" style="font-size: 11px;">{{ $q->points }} {{ __('pts') }}</span>
+                                <span class="badge bg-secondary" style="font-size: 11px;">{{ $q->points }} {{ __('messages.quizzes.pts') }}</span>
                             </div>
 
                             <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -49,7 +49,7 @@
         <div class="col-lg-4">
             <div class="glass-card" style="padding: 32px; text-align: center; position: sticky; top: 100px;">
                 @if($remainingSeconds !== null)
-                    <div style="font-size: 14px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">{{ __('Time Remaining') }}</div>
+                    <div style="font-size: 14px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">{{ __('messages.quizzes.time_remaining') }}</div>
                     <div id="timer" style="font-size: 40px; font-weight: 800; color: #fff; font-family: monospace; line-height: 1; margin-bottom: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 12px 20px; display: inline-block;">
                         00:00
                     </div>
@@ -79,14 +79,14 @@
                         var interval = setInterval(updateTimer, 1000);
                     </script>
                 @else
-                    <div style="font-size: 14px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">{{ __('Time Limit') }}</div>
+                    <div style="font-size: 14px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">{{ __('messages.quizzes.param_time_limit') }}</div>
                     <div style="font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 20px;">
-                        <i class="fa-solid fa-infinity"></i> {{ __('Unlimited') }}
+                        <i class="fa-solid fa-infinity"></i> {{ __('messages.quizzes.param_unlimited') }}
                     </div>
                 @endif
 
                 <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; text-align: left; font-size: 13.5px; color: var(--text-muted);">
-                    <i class="fa-solid fa-circle-question me-2"></i> {{ __('Answer all questions and click "Submit Quiz" to finish.') }}
+                    <i class="fa-solid fa-circle-question me-2"></i> {{ __('messages.quizzes.take_footer_note') }}
                 </div>
             </div>
         </div>
