@@ -1,0 +1,83 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container" style="padding-top: 100px; padding-bottom: 60px; max-width: 800px;">
+    <div style="margin-bottom: 24px;">
+        <a href="{{ route('student.quizzes.show', $attempt->quiz_id) }}" style="color: var(--brand); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px;">
+            <i class="fas fa-arrow-left"></i> Тесттин башкы бетине кайтуу
+        </a>
+    </div>
+
+    <!-- Attempt Result Banner -->
+    <div style="background: var(--bg-2); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 32px; text-align: center; margin-bottom: 32px;">
+        <span style="font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700;">Жыйынтык</span>
+        
+        <h1 style="font-size: 40px; font-weight: 800; color: #fff; margin-top: 8px; margin-bottom: 8px;">{{ $attempt->score }}%</h1>
+        
+        <div style="font-size: 14.5px; color: var(--text-muted); margin-bottom: 20px;">
+            Упай: <strong>{{ $attempt->earned_points }}</strong> / {{ $attempt->total_points }}
+        </div>
+
+        @if($attempt->passed)
+            <span class="badge" style="background: rgba(16,185,129,0.15); color: var(--success, #10B981); font-size: 14px; padding: 8px 20px; font-weight: 700; border-radius: 9999px;">
+                <i class="fas fa-check-circle"></i> СИЗ Т
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+                    <div>
+                        <span style="color: var(--text-dim); display:block; font-size:11px; text-transform:uppercase; margin-bottom:4px;">Сиздин жообуңуз:</span>
+                        <div style="background: {{ $isCorrect ? 'rgba(16,185,129,0.05)' : 'rgba(239,68,68,0.05)' }}; border: 1px solid {{ $isCorrect ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)' }}; padding: 12px 16px; border-radius: 10px; color: #fff;">
+                            {{ $selectedOption ? $selectedOption->option_text : 'Жооп берилген эмес' }}
+                        </div>
+                    </div>
+
+                    @if(!$isCorrect && $correctOption)
+                        <div>
+                            <span style="color: var(--text-dim); display:block; font-size:11px; text-transform:uppercase; margin-bottom:4px;">Туура жооп:</span>
+                            <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.15); padding: 12px 16px; border-radius: 10px; color: #fff;">
+                                {{ $correctOption->option_text }}
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+                @if($q->explanation)
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 14px; font-size: 13.5px; color: var(--text-muted);">
+                        <strong>Түшүндүрмө:</strong><br>
+                        {{ $q->explanation }}
+                    </div>
+                @endif
+            </div>
+        @endforeach
+    </div>
+</div>
+@endsection

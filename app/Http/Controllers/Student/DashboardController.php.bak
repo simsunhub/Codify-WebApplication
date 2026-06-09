@@ -1,0 +1,154 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // For now, let's keep a nice mock fallback of 5 if activity exists
+            $streak = count($activityDates) > 0 ? min(5, count($activityDates)) : 0;
+        }
+
+        return view('student.dashboard', compact(
+            'enrollments', 
+            'continueLesson', 
+            'continueCourse', 
+            'recommended',
+            'totalEnrolledCount',
+            'completedCoursesCount',
+            'inProgressCount',
+            'announcements',
+            'certificatesCount',
+            'solvedChallengesCount',
+            'quizAttemptsCount',
+            'streak'
+        ));
+    }
+}

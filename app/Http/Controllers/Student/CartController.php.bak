@@ -1,0 +1,185 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Notify Instructor
+            $instructor = $course->instructor ?? $course->user;
+            if ($instructor) {
+                Notification::create([
+                    'user_id' => $instructor->id,
+                    'type' => 'enrollment',
+                    'body' => __('Student :student bought your course ":course".', ['student' => auth()->user()->name, 'course' => $course->title]),
+                    'url' => route('teacher.courses.index'),
+                    'is_read' => false,
+                ]);
+            }
+        }
+
+        // 3. Create Payment record
+        Payment::create([
+            'order_id' => $order->id,
+            'user_id' => auth()->id(),
+            'amount' => $total,

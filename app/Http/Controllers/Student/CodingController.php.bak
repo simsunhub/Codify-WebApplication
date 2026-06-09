@@ -1,0 +1,90 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ->count('problem_id');
+
+        $totalSubmissions = CodingSubmission::where('user_id', $userId)->count();
+        $acceptedSubmissions = CodingSubmission::where('user_id', $userId)->where('status', 'accepted')->count();
+        $successRate = $totalSubmissions > 0 ? round(($acceptedSubmissions / $totalSubmissions) * 100, 1) : 0;
+
+        $langs = ProgrammingLanguage::active()->get();
+
+        // Get language stats
+        $langStats = CodingSubmi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            'code' => 'required|string',
+        ]);
+
+        $problem = CodingProblem::where('slug', $slug)->published()->firstOrFail();
+        $language = ProgrammingLanguage::findOrFail($request->language_id);
+        
+        // Execute code via JudgeService
+        $result = $this->judgeService->execute($problem, $language, $request->code);

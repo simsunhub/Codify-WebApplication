@@ -1,0 +1,166 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                // Associate the existing user with Google ID
+                $user->update([
+                    'google_id' => $socialUser->getId(),
+                ]);
+            } else {
+                // Retrieve the role stored in redirect, defaulting to 'student'
+                $role = session()->pull('social_role', 'student');
+                
+                // Keep role within allowed values
+                if (!in_array($role, ['student', 'instructor'])) {
+                    $role = 'student';
+                }
+
+                // Create a new user
+                $user = User::create([
+                    'name' => $socialUser->getName(),
+                    'email' => $socialUser->getEmail(),
+     */
+    protected function loginOrCreateSocialUser($socialUser): RedirectResponse
+    {
+        // Try to find the user by google_id
+        $user = User::where('google_id', $socialUser->getId())->first();
+
+        if (!$user) {
+            // Try to find the user by email
+            $user = User::where('email', $socialUser->getEmail())->first();
+
+            if ($user) {
+                // Associate the existing user with Google ID
+                $user->update([
+                    'google_id' => $socialUser->getId(),
+                ]);
+            } else {
+                // Retrieve the role stored in redirect, defaulting to 'student'
+                $role = session()->pull('social_role', 'student');
+                
+                // Keep role within allowed values
+                if (!in_array($role, ['student', 'instructor'])) {
+                    $role = 'student';
+                }
+
+                // Create a new user
+                $user = User::create([
+                    'name' => $socialUser->getName(),
+                    'email' => $socialUser->getEmail(),
+                    'google_id' => $socialUser->getId(),
+                    'password' => Hash::make(Str::random(24)),
+                    'role' => $role,
+                    'email_verified_at' => now(),
+                ]);
+            }
+        }
+
+        // Log the user in
+        Auth::login($user);
+
+        // Redirect based on role
+        if ($user->role === 'instructor') {
+            return redirect()->route('teacher.dashboard');
+        } elseif ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return redirect()->route('home');
+    }
+}

@@ -1,0 +1,80 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ];
+
+        // 2. Students Distribution by Course (Doughnut)
+        $coursesChart = [
+            'labels' => $courses->pluck('title')->map(fn($t) => Str::limit($t, 20))->toArray(),
+            'data' => $courses->pluck('enrollments_count')->toArray()
+        ];
+
+        return view('teacher.dashboard', compact(
+            'totalCourses', 'activeCourses', 'totalStudents',
+            'totalEnrollments', 'totalRevenue', 'averageRating',
+            'totalReviews', 'recentEnrollments', 'courses',
+            'enrollmentsChart', 'coursesChart'
+        ));
+    }
+
+    /**
+     * Translate month names to Russian.
+     */
+    private function translateMonth($month)
+    {
