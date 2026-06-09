@@ -849,13 +849,6 @@
             {{ __('messages.dash.coding_challenges') }}
         </a>
 
-        {{-- Assignments --}}
-        <a href="{{ route('teacher.assignments.index') }}"
-           class="ed-nav-link {{ request()->routeIs('teacher.assignments.*') ? 'active' : '' }}">
-            <span class="nav-icon"><i class="fa-solid fa-tasks"></i></span>
-            {{ __('messages.dash.assignments') }}
-        </a>
-
         {{-- Quizzes --}}
         <a href="{{ route('teacher.quizzes.index') }}"
            class="ed-nav-link {{ request()->routeIs('teacher.quizzes.*') ? 'active' : '' }}">
