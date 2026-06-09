@@ -105,7 +105,10 @@ Route::middleware('auth')->group(function () {
     Route::middleware('lms_module:quizzes')->group(function () {
         Route::get('/student/quizzes', [\App\Http\Controllers\Student\QuizController::class, 'index'])->name('student.quizzes.index');
         Route::get('/student/quizzes/{quiz}', [\App\Http\Controllers\Student\QuizController::class, 'show'])->name('student.quizzes.show');
-        Route::post('/student/quizzes/{quiz}/submit', [\App\Http\Controllers\Student\QuizController::class, 'submit'])->name('student.quizzes.submit');
+        Route::post('/student/quizzes/{quiz}/start', [\App\Http\Controllers\Student\QuizController::class, 'start'])->name('student.quizzes.start');
+        Route::get('/student/quizzes/attempt/{attempt}', [\App\Http\Controllers\Student\QuizController::class, 'take'])->name('student.quizzes.take');
+        Route::post('/student/quizzes/attempt/{attempt}/submit', [\App\Http\Controllers\Student\QuizController::class, 'submit'])->name('student.quizzes.submit');
+        Route::get('/student/quizzes/result/{attempt}', [\App\Http\Controllers\Student\QuizController::class, 'result'])->name('student.quizzes.result');
     });
 
     // Student: Assignments
