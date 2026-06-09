@@ -160,7 +160,7 @@ return [
         'administrator' => 'Yönetici',
         'all_announcements' => 'All Announcements',
         'announcements' => 'Duyurular',
-        'assignments' => 'Ödevler',
+        'assignments' => 'ToDo List',
         'certificates' => 'Sertifikalar',
         'coding_challenges' => 'Kodlama Görevleri',
         'course_list' => 'Kurs Listesi',
