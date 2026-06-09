@@ -406,7 +406,7 @@
         }
         .footer-grid {
             display: grid;
-            grid-template-columns: 1.5fr repeat(3, 1fr);
+            grid-template-columns: 1.5fr repeat(2, 1fr);
             gap: 40px;
             margin-bottom: 40px;
         }
@@ -880,6 +880,25 @@
                     <div class="footer-brand">{{ \App\Models\SiteSetting::get('site_name', 'EduPlatform') }}</div>
                     <p class="footer-desc">{{ \App\Models\SiteSetting::get('site_description', 'Transform your life through education. Learn from the best instructors and institutions around the world, at your own pace.') }}</p>
                     
+                    @php
+                        $supportPhone = \App\Models\SiteSetting::get('support_phone');
+                        $supportEmail = \App\Models\SiteSetting::get('support_email');
+                    @endphp
+                    @if($supportPhone || $supportEmail)
+                        <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+                            @if($supportPhone)
+                                <a href="tel:{{ $supportPhone }}" style="font-size: 13px; display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s;" class="hover:text-white">
+                                    <i class="fa-solid fa-phone" style="color: var(--brand, #6366f1); font-size: 12px;"></i> {{ $supportPhone }}
+                                </a>
+                            @endif
+                            @if($supportEmail)
+                                <a href="mailto:{{ $supportEmail }}" style="font-size: 13px; display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s;" class="hover:text-white">
+                                    <i class="fa-solid fa-envelope" style="color: var(--brand, #6366f1); font-size: 12px;"></i> {{ $supportEmail }}
+                                </a>
+                            @endif
+                        </div>
+                    @endif
+
                     <div class="footer-social-round">
                         @if($inst = \App\Models\SiteSetting::get('social_instagram'))
                             <a href="{{ $inst }}" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -906,41 +925,7 @@
                         <a href="/about">Hakkımızda</a>
                         <a href="/search">Tüm Kurslar</a>
                         <a href="/blog">Blog</a>
-                        <a href="/contact">İletişim</a>
-                    </div>
-                </div>
-                <div>
-                    <div class="footer-heading">Destek & SSS</div>
-                    <div class="footer-links" style="gap: 12px;">
-                        @php
-                            $footerFaqs = \App\Models\Faq::where('is_active', true)->orderBy('sort_order', 'asc')->take(3)->get();
-                        @endphp
-                        @if($footerFaqs->isNotEmpty())
-                            @foreach($footerFaqs as $faq)
-                                <a href="/contact" style="font-size: 13px; line-height: 1.4;" title="{{ $faq->answer }}">{{ $faq->question }}</a>
-                            @endforeach
-                        @else
-                            <a href="/contact">Destek & SSS Sayfası</a>
-                        @endif
-
-                        @php
-                            $supportPhone = \App\Models\SiteSetting::get('support_phone');
-                            $supportEmail = \App\Models\SiteSetting::get('support_email');
-                        @endphp
-                        @if($supportPhone || $supportEmail)
-                            <div style="margin-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; display: flex; flex-direction: column; gap: 8px;">
-                                @if($supportPhone)
-                                    <a href="tel:{{ $supportPhone }}" style="font-size: 13px; display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s;" class="hover:text-white">
-                                        <i class="fa-solid fa-phone" style="color: var(--brand, #6366f1); font-size: 12px;"></i> {{ $supportPhone }}
-                                    </a>
-                                @endif
-                                @if($supportEmail)
-                                    <a href="mailto:{{ $supportEmail }}" style="font-size: 13px; display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; transition: color 0.2s;" class="hover:text-white">
-                                        <i class="fa-solid fa-envelope" style="color: var(--brand, #6366f1); font-size: 12px;"></i> {{ $supportEmail }}
-                                    </a>
-                                @endif
-                            </div>
-                        @endif
+                        <a href="/contact">Destek & SSS Sayfası</a>
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ class SiteSetting extends Model
     public static function get($key, $default = null)
     {
         $setting = self::where('key', $key)->first();
-        return $setting ? $setting->value : $default;
+        return ($setting && $setting->value !== null && $setting->value !== '') ? $setting->value : $default;
     }
 
     public static function set($key, $value)
